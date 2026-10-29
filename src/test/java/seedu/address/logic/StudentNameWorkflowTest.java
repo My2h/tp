@@ -23,14 +23,14 @@ public class StudentNameWorkflowTest {
     public Path temporaryFolder;
 
     @Test
-    public void execute_addEditFindAndReload_preservesInitialsAbbreviationsAndAccents() throws Exception {
+    public void execute_addEditFindAndReload_preservesInitialsAbbreviationsAccentsAndBrackets() throws Exception {
         ModelManager model = new ModelManager();
         JsonAddressBookStorage rosterFile = new JsonAddressBookStorage(temporaryFolder.resolve("roster.json"));
         LogicManager logic = new LogicManager(model, new StorageManager(rosterFile,
                 new JsonUserPrefsStorage(temporaryFolder.resolve("preferences.json"))));
         logic.execute("init grp/T09");
         List<String> names = List.of("J. Tan", "Ravi s/o Kumar", "Rani D/O Kumar",
-                "Arun a/l Ravi", "Meena A/P Kumar", "E\u0301lodie Tan");
+                "Arun a/l Ravi", "Meena A/P Kumar", "E\u0301lodie Tan", "Tan Ah Kow (Mike)");
         for (int i = 0; i < names.size(); i++) {
             String name = names.get(i);
             logic.execute("add n/" + name + " e/student" + i + "@example.com"
